@@ -1,0 +1,36 @@
+USE [AdvDiversity]
+GO
+/****** Object:  StoredProcedure [dbo].[JobType_SelectAll]    Script Date: 7/6/2022 2:02:06 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER proc [dbo].[JobType_SelectAll]
+
+
+    -- =============================================
+    -- Author: Jorge Calderon
+    -- Create date: 6/9/2022
+    -- Description: SelectByCreatedBy for dbo.Jobs_Select_ByCreatedBy
+    -- Code Reviewer: Gene Yee
+    -- MODIFIED BY: Author
+    -- MODIFIED DATE: M/DD/YEAR
+    -- Code Reviewer:
+    -- Note:
+    -- =============================================
+
+/*---------START TEST CODE----------
+
+		EXECUTE [dbo].[JobType_SelectAll]
+
+*/----------END TEST CODE-----------
+
+as
+
+BEGIN
+
+	SELECT	[Id]
+			,[Type]
+	  FROM	[dbo].[JobType]
+
+END
