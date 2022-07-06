@@ -5,4 +5,5 @@ The Institute to Advance Diversity is an upcoming mentor/mentee web platform tha
 
 
 
-*NOTE* CODE WITHIN THESE FOLDERS IS SUBJECT TO CHANGE AS I AM STILL WORKING ON THE PROJECT *NOTE*
+*NOTE: All code within these folders is subject to change as I am still currently working on this project
+
