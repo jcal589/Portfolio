@@ -38,7 +38,7 @@ function JobsForm() {
         locations: [],
         jobTypes: [],
         locationTypes: [],
-        states: [],     
+        states: [],
     });
 
     const [modalShow, setModalShow] = useState(false);
