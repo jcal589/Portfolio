@@ -1,0 +1,88 @@
+USE [AdvDiversity]
+GO
+/****** Object:  StoredProcedure [dbo].[JobsAdmin_Update]    Script Date: 7/6/2022 2:01:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER   proc [dbo].[JobsAdmin_Update]
+			@Id int OUTPUT
+			,@JobTypeId int
+			,@LocationId int
+			,@CreatedBy int
+			,@Title nvarchar(200)
+			,@Description nvarchar(4000)
+			,@Requirements nvarchar(3000) 
+			,@IsActive bit
+			,@ContactName nvarchar(100)
+			,@ContactPhone nvarchar(20)
+			,@ContactEmail nvarchar(200)
+
+    -- =============================================
+    -- Author: Jorge Calderon
+    -- Create date: 6/9/2022
+    -- Description: Update for dbo.JobsAdmin_Update
+    -- Code Reviewer: Gene Yee
+    -- MODIFIED BY: Author
+    -- MODIFIED DATE: M/DD/YEAR
+    -- Code Reviewer:
+    -- Note:
+    -- =============================================
+
+
+/*---------START TEST CODE----------
+
+	DECLARE @Id int = 1
+	DECLARE @JobTypeId int = 3
+			,@LocationId int = 5
+			,@CreatedBy int = 2
+			,@Title nvarchar(200) = 'Updated Lorem Ipsum' 
+			,@Description nvarchar(4000) = 'Updated Lorem Ipsum' 
+			,@Requirements nvarchar(3000)  = 'Updated Lorem Ipsum' 
+			,@IsActive bit = 1
+			,@ContactName nvarchar(100) = 'Updated Lorem Ipsum' 
+			,@ContactPhone nvarchar(20) = 'Updated Lorem Ipsum' 
+			,@ContactEmail nvarchar(200) = 'Updated Lorem Ipsum' 
+
+	EXECUTE	[dbo].[JobsAdmin_Update]
+			@Id OUTPUT
+			,@JobTypeId
+			,@LocationId
+			,@CreatedBy
+			,@Title
+			,@Description
+			,@Requirements
+			,@IsActive
+			,@ContactName
+			,@ContactPhone
+			,@ContactEmail
+
+
+	SELECT *
+	FROM dbo.Jobs
+	WHERE Id = @Id
+
+*/----------END TEST CODE-----------
+
+as 
+
+BEGIN 
+	
+	DECLARE @DateNow datetime2(7) = GETUTCDATE()
+
+	UPDATE [dbo].[Jobs]
+	   SET [JobTypeId] = @JobTypeId
+		  ,[LocationId] = @LocationId
+		  ,[CreatedBy] = @CreatedBy
+		  ,[Title] = @Title
+		  ,[Description] = @Description
+		  ,[Requirements] = @Requirements
+		  ,[IsActive] = @IsActive
+		  ,[ContactName] = @ContactName
+		  ,[ContactPhone] = @ContactPhone
+		  ,[ContactEmail] = @ContactEmail
+		  ,[DateModified] = @DateNow
+	WHERE Id = @Id
+
+END
