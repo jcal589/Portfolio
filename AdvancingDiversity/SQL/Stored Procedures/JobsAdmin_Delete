@@ -1,0 +1,48 @@
+USE [AdvDiversity]
+GO
+/****** Object:  StoredProcedure [dbo].[JobsAdmin_Delete]    Script Date: 7/6/2022 1:59:39 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER   proc [dbo].[JobsAdmin_Delete]
+			@Id int OUTPUT
+
+    -- =============================================
+    -- Author: Jorge Calderon
+    -- Create date: 6/9/2022
+    -- Description: Delete for dbo.JobsAdmin_Delete (isActive gets Set to False)
+    -- Code Reviewer: Gene Yee
+    -- MODIFIED BY: Author
+    -- MODIFIED DATE: M/DD/YEAR
+    -- Code Reviewer:
+    -- Note:
+    -- =============================================
+
+
+/*---------START TEST CODE----------
+
+	DECLARE @Id int = 1
+
+	EXECUTE	[dbo].[dbo].[JobsAdmin_Delete]
+			@Id OUTPUT
+
+	SELECT *
+	FROM dbo.Jobs
+	WHERE Id = @Id
+
+*/----------END TEST CODE-----------
+
+as
+
+BEGIN
+
+	DECLARE @DateNow datetime2(7) = GETUTCDATE()
+	DECLARE @IsActive int = 0
+
+	UPDATE	[dbo].[Jobs]
+       SET	[IsActive] = @IsActive
+			,[DateModified] = @DateNow
+	  WHERE Id = @Id
+
+END
