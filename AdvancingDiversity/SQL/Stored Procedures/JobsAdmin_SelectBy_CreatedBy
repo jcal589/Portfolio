@@ -1,0 +1,73 @@
+USE [AdvDiversity]
+GO
+/****** Object:  StoredProcedure [dbo].[JobsAdmin_Select_ByCreatedBy]    Script Date: 7/6/2022 2:00:48 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER   proc [dbo].[JobsAdmin_Select_ByCreatedBy]
+		@CreatedById int
+		,@PageIndex int
+		,@PageSize int
+
+   -- =============================================
+    -- Author: Jorge Calderon
+    -- Create date: 6/10/2022
+    -- Description: SelectByCreatedBy for dbo.JobsAdmin_Select_ByCreatedBy
+    -- Code Reviewer: Gene Yee
+    -- MODIFIED BY: Author
+    -- MODIFIED DATE: M/DD/YEAR
+    -- Code Reviewer:
+    -- Note:
+    -- =============================================
+
+/*---------START TEST CODE----------
+
+		DECLARE @CreatedById int = 1
+				,@PageIndex int = 0
+				,@PageSize int = 5
+
+		EXECUTE [dbo].[JobsAdmin_Select_ByCreatedBy]
+				@CreatedById
+				,@PageIndex
+				,@PageSize
+
+*/----------END TEST CODE-----------
+
+as
+
+BEGIN
+
+	DECLARE	 @offset int = @PageIndex * @PageSize
+
+	 SELECT	j.Id as JobId
+			,jt.Id as JobType_Id
+			,jt.Type as JobType_Type
+			,l.Id as Location_Id
+			,l.LineOne as Location_LineOne
+			,l.LineTwo as Location_LineTwo
+			,l.City as Location_City
+			,l.Zip as Location_Zip
+			,j.CreatedBy
+			,j.Title as JobTitle
+			,j.Description as JobDescription
+			,j.Requirements as JobRequirements
+			,j.IsActive
+			,j.ContactName as JobContactName
+			,j.ContactPhone as JobContactPhone
+			,j.ContactEmail as JobContactEmail
+			,j.DateCreated
+			,j.DateModified
+			,TotalCount = COUNT(1) OVER()
+	   FROM	[dbo].[Jobs] as j inner join dbo.Locations as l
+			on j.LocationId = l.Id
+			inner join dbo.JobType as jt
+			on j.JobTypeId = jt.Id
+	  WHERE	j.CreatedBy = @CreatedById
+
+	  Order by j.Id
+	  OFFSET @offSet Rows
+	  Fetch Next @PageSize Rows ONLY
+
+
+END
