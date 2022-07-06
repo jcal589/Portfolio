@@ -1,0 +1,93 @@
+USE [AdvDiversity]
+GO
+/****** Object:  StoredProcedure [dbo].[JobsAdmin_Insert]    Script Date: 7/6/2022 2:00:23 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER   proc [dbo].[JobsAdmin_Insert]
+		@JobTypeId int
+		,@LocationId int
+		,@CreatedBy int
+		,@Title nvarchar(200)
+		,@Description nvarchar(4000)
+		,@Requirements nvarchar(3000) 
+		,@IsActive bit
+		,@ContactName nvarchar(100)
+		,@ContactPhone nvarchar(20)
+		,@ContactEmail nvarchar(200)
+		,@Id int OUTPUT
+
+    -- =============================================
+    -- Author: Jorge Calderon
+    -- Create date: 6/9/2022
+    -- Description: Insert for dbo.JobsAdmin_Insert
+    -- Code Reviewer: Gene Yee
+    -- MODIFIED BY: Author
+    -- MODIFIED DATE: M/DD/YEAR
+    -- Code Reviewer:
+    -- Note:
+    -- =============================================
+
+/*---------START TEST CODE----------
+
+		DECLARE @Id int = 0;
+		DECLARE @JobTypeId int = 1
+				,@LocationId int = 3
+				,@CreatedBy int = 2
+				,@Title nvarchar(200) = 'Lorem ipsum'
+				,@Description nvarchar(4000) = 'Lorem ipsum...'
+				,@Requirements nvarchar(3000) = 'Lorem ipsum...'
+				,@IsActive bit = 1
+				,@ContactName nvarchar(100) = 'Lorem ipsum...'
+				,@ContactPhone nvarchar(20) = 'Lorem ipsum...'
+				,@ContactEmail nvarchar(200) = 'Lorem ipsum...'
+
+		EXECUTE	[dbo].[JobsAdmin_Insert]
+				@JobTypeId
+				,@LocationId
+				,@CreatedBy
+				,@Title
+				,@Description
+				,@Requirements
+				,@IsActive
+				,@ContactName
+				,@ContactPhone
+				,@ContactEmail
+				,@Id OUTPUT
+
+		SELECT *
+		FROM dbo.Jobs
+
+*/----------END TEST CODE-----------
+
+as
+
+BEGIN
+
+	INSERT INTO [dbo].[Jobs]
+			   ([JobTypeId]
+			   ,[LocationId]
+			   ,[CreatedBy]
+			   ,[Title]
+			   ,[Description]
+			   ,[Requirements]
+			   ,[IsActive]
+			   ,[ContactName]
+			   ,[ContactPhone]
+			   ,[ContactEmail])
+		 VALUES
+			   (@JobTypeId
+				,@LocationId
+				,@CreatedBy
+				,@Title
+				,@Description
+				,@Requirements
+				,@IsActive
+				,@ContactName
+				,@ContactPhone
+				,@ContactEmail)
+
+		SET @Id = SCOPE_IDENTITY()
+
+END
